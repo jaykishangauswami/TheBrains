@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TheBrains</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="dashboard" translatable="false">Dashboard</string>
+    <string name="profile" translatable="false">Edit Profile</string>
+    <string name="chat" translatable="false">Chat</string>
+    <string name="transaction" translatable="false">Transaction</string>
+    <string name="report" translatable="false">Report</string>
+    <string name="setting" translatable="false">Setting</string>
+    <string name="request" translatable="false">Request/Complain</string>
+    <string name="about" translatable="false">About</string>
+    <string name="login_or_logout" translatable="false">Logout</string>
+    <string name="elv_acc_title" translatable="false">Accounts</string>
+    <string name="elv_acc_title_cust" translatable="false">Customer</string>
+    <string name="elv_acc_title_suppl" translatable="false">Supplier</string>
+    <string name="elv_acc_title_allacc" translatable="false">All Accounts</string>
+    <string name="elv_inv_title" translatable="false">Inventory</string>
+    <string name="elv_inv_title_item" translatable="false">Inventory Item</string>
+    <string name="elv_inv_title_mesurement" translatable="false">Unit Of Measurement</string>
+    <string name="elv_inv_title_all_ser" translatable="false">Services</string>
+    <string name="hello_world" translatable="false">hello</string>
+    <string name="runtime_permissions_txt" translatable="false">Please Accept All Permission</string>
+    <string name="hintuname" translatable="false">User Name</string>
+    <string name="hintpwd" translatable="false">Password</string>
+    <string name="forgotpwd" translatable="false">Forgot password?</string>
+    <string name="btnlogin" translatable="false">Login</string>
+    <string name="changelanguage" translatable="false">Change Language</string>
+    <string name="cashhand" translatable="false">Cash-in-hand</string>
+    <string name="bankacc" translatable="false">Bank A/Cs</string>
+    <string name="item" translatable="false">Item</string>
+    <string name="invoice" translatable="false">Invoice</string>
+    <string name="hintphone" translatable="false">Mobile Number</string>
+</resources>

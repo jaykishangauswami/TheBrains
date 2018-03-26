@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TheBrains</string>
+    <string name="navigation_drawer_open" translatable="false">નેવિગેશન ડ્રોવર ને ખોલો</string>
+    <string name="navigation_drawer_close" translatable="false">નેવિગેશન ડ્રોવર બંધ કરો</string>
+    <string name="action_settings" translatable="false">સેટિંગ્સ</string>
+    <string name="dashboard" translatable="false">ડેશબોર્ડ</string>
+    <string name="profile" translatable="false">પ્રોફાઇલ સંપાદિત કરો</string>
+    <string name="chat" translatable="false">ચેટ</string>
+    <string name="transaction" translatable="false">વ્યવહાર</string>
+    <string name="report" translatable="false">અહેવાલ</string>
+    <string name="setting" translatable="false">સેટિંગ</string>
+    <string name="request" translatable="false">વિનંતી / ફરિયાદ</string>
+    <string name="about" translatable="false">વિશે</string>
+    <string name="login_or_logout" translatable="false">લૉગ   આઉટ</string>
+    <string name="elv_acc_title" translatable="false">એકાઉન્ટ્સ</string>
+    <string name="elv_acc_title_cust" translatable="false">ગ્રાહક</string>
+    <string name="elv_acc_title_suppl" translatable="false">પુરવઠોકર્તા</string>
+    <string name="elv_acc_title_allacc" translatable="false">બધા એકાઉન્ટ્સ</string>
+    <string name="elv_inv_title" translatable="false">ઈન્વેન્ટરી</string>
+    <string name="elv_inv_title_item" translatable="false">ઈન્વેન્ટરી આઇટમ</string>
+    <string name="elv_inv_title_mesurement" translatable="false">"માપન એકમ  "</string>
+    <string name="elv_inv_title_all_ser" translatable="false">સેવાઓ</string>
+    <string name="hello_world" translatable="false">હેલ્લો</string>
+    <string name="runtime_permissions_txt" translatable="false">કૃપા કરીને બધી પરવાનગી સ્વીકારો</string>
+    <string name="hintuname" translatable="false">વપરાશકર્તા નામ</string>
+    <string name="hintpwd" translatable="false">પાસવર્ડ</string>
+    <string name="forgotpwd" translatable="false">પાસવર્ડ ભૂલી ગયા છો?</string>
+    <string name="btnlogin" translatable="false">લૉગિન</string>
+    <string name="changelanguage" translatable="false">ભાષા બદલો</string>
+    <string name="cashhand" translatable="false">કેશ ઇન હેન્ડ</string>
+    <string name="bankacc" translatable="false">બેન્ક એ / સીએસ</string>
+    <string name="item" translatable="false">આઇટમ</string>
+    <string name="invoice" translatable="false">ભરતિયું</string>
+    <string name="hintphone" translatable="false">મોબાઇલ નંબર</string>
+</resources>
