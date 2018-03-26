@@ -27,7 +27,9 @@ import com.bumptech.glide.util.Util;
 import com.the.brain.AppController;
 import com.the.brain.R;
 import com.the.brain.Utils.Constans;
+import com.the.brain.Utils.GlobalElements;
 import com.the.brain.Utils.Utils;
+import com.the.brain.Utils.Validation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,9 +108,24 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 OS_version = android.os.Build.VERSION.RELEASE;
                 SDK_version = String.valueOf(android.os.Build.VERSION.SDK_INT);
 
-                if (IMEI != null && !IMEI.equals("")) {
-                    Load_DashBoard();
-                } else {
+                if (IMEI == null && IMEI.equals("")) {
+                    Toast.makeText(this, "Try Again Can't Find Data", Toast.LENGTH_SHORT).show();
+                }
+                else if(!Validation.isValid(Validation.BLANK_CHECK,edt_uname.getText().toString())){
+                    edt_uname.setError("Mobile Number is Required");
+                }
+                else if(!Validation.isValid(Validation.MOBILE,edt_uname.getText().toString())){
+                    edt_uname.setError("Mobile Number is not valid");
+                }
+                else if(!Validation.isValid(Validation.BLANK_CHECK,edt_pwd.getText().toString())){
+                    edt_pwd.setError("Password Required");
+                }
+                else {
+                    if (GlobalElements.isConnectingToInternet(LoginActivity.this)) {
+                        Load_DashBoard();
+                    } else {
+                        GlobalElements.showDialog(LoginActivity.this);
+                    }
                 }
                 break;
             case R.id.txt_forgot:
@@ -174,29 +191,31 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     progressDialog.dismiss();
                     String resposeString;
-                    try {
-                        resposeString = response.body().string();
-                        JSONObject jsonObject = new JSONObject(resposeString);
-                        if (jsonObject.getBoolean("status")) {
-                            JSONObject jsonObject1 = jsonObject.getJSONObject("data");
-                            Utils.getSharedPreference(LoginActivity.this).edit().putBoolean(Constans.PREFERENCE_IS_LOGGED_IN, false).apply();
+                    if (response.isSuccessful()) {
+                        try {
+                            resposeString = response.body().string();
+                            JSONObject jsonObject = new JSONObject(resposeString);
+                            if (jsonObject.getBoolean("status")) {
+                                JSONObject jsonObject1 = jsonObject.getJSONObject("data");
+                                Utils.getSharedPreference(LoginActivity.this).edit().putBoolean(Constans.PREFERENCE_IS_LOGGED_IN, false).apply();
 
-                            Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_USER_ID, jsonObject1.getString("id")).apply();
-                            Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_COMPANY_NAME, jsonObject1.getString("company_name")).apply();
-                            Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_EMAIL, jsonObject1.getString("email")).apply();
-                            Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_COUNTRY_CODE, jsonObject1.getString("country")).apply();
-                            Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_STATE_CODE, jsonObject1.getString("state")).apply();
-                            Toast.makeText(LoginActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                            Intent start_DashBoard = new Intent(LoginActivity.this, Dashboard.class);
-                            startActivity(start_DashBoard);
-                            finish();
+                                Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_USER_ID, jsonObject1.getString("id")).apply();
+                                Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_COMPANY_NAME, jsonObject1.getString("company_name")).apply();
+                                Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_EMAIL, jsonObject1.getString("email")).apply();
+                                Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_COUNTRY_CODE, jsonObject1.getString("country")).apply();
+                                Utils.getSharedPreference(LoginActivity.this).edit().putString(Constans.PREFERENCE_STATE_CODE, jsonObject1.getString("state")).apply();
+                                Toast.makeText(LoginActivity.this, "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                Intent start_DashBoard = new Intent(LoginActivity.this, Dashboard.class);
+                                startActivity(start_DashBoard);
+                                finish();
 
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
                 }
 

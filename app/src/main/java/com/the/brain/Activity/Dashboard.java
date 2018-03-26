@@ -252,10 +252,11 @@ public class Dashboard extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 String message = mEditTextMessage.getText().toString();
+
                 if (TextUtils.isEmpty(message)) {
                     return;
                 }
-                requestUploadSurvey();
+
                 sendMessage(message);
                 mEditTextMessage.setText("");
             }
@@ -278,43 +279,7 @@ public class Dashboard extends AppCompatActivity
 
     }
 
-    private void requestUploadSurvey() {
 
-
-        MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[imagefiles.size()];
-
-        for (int index = 0; index < imagefiles.size(); index++) {
-            Log.d("Data", "requestUploadSurvey: survey image " + index + "  " + imagefiles.get(index).getAbsolutePath());
-            File file = new File(imagefiles.get(index).getAbsolutePath());
-            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
-            surveyImagesParts[index] = MultipartBody.Part.createFormData("SurveyImage", file.getName(), surveyBody);
-        }
-
-//        final WebServicesAPI webServicesAPI = RetrofitManager.getInstance().getRetrofit().create(WebServicesAPI.class);
-        Call<ResponseBody> surveyResponse = null;
-        if (surveyImagesParts != null) {
-            surveyResponse = AppController.getInstance().getApiInterface().uploadSurvey(surveyImagesParts);
-        }
-        surveyResponse.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    String image=response.body().string();
-                    Toast.makeText(Dashboard.this, ""+image, Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                t.printStackTrace();
-
-
-            }
-        });
-    }
 
     private void start() {
 
@@ -347,7 +312,7 @@ public class Dashboard extends AppCompatActivity
     private void sendImage(String imagepath) {
         ChatMessage chatMessage = new ChatMessage(null, true, true,imagepath);
         mAdapter.add(chatMessage);
-
+        requestUploadSurvey();
         mimicOtherImage(imagepath);
     }
 
@@ -368,6 +333,7 @@ public class Dashboard extends AppCompatActivity
                 File f=new File (imagepath);
                 imagefiles.add(f);
                 sendImage(imagepath);
+
             }
 
 //            String path = null;
@@ -439,5 +405,42 @@ public class Dashboard extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void requestUploadSurvey() {
+
+
+        MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[imagefiles.size()];
+
+        for (int index = 0; index < imagefiles.size(); index++) {
+            Log.d("Data", "requestUploadSurvey: survey image " + index + "  " + imagefiles.get(index).getAbsolutePath());
+            File file = new File(imagefiles.get(index).getAbsolutePath());
+            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+            surveyImagesParts[index] = MultipartBody.Part.createFormData("SurveyImage", file.getName(), surveyBody);
+        }
+
+//        final WebServicesAPI webServicesAPI = RetrofitManager.getInstance().getRetrofit().create(WebServicesAPI.class);
+        Call<ResponseBody> surveyResponse = null;
+        if (surveyImagesParts != null) {
+            surveyResponse = AppController.getInstance().getApiInterface().uploadSurvey(surveyImagesParts);
+        }
+        surveyResponse.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String image=response.body().string();
+                    Toast.makeText(Dashboard.this, ""+image, Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+
+
+            }
+        });
     }
 }
